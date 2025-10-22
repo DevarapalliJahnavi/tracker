@@ -1,0 +1,8 @@
+Flask>=2.0
+Jinja2
+itsdangerous
+Werkzeug
+click
+
+# Optional libs used by templates
+# Chart.js, AOS, Rellax are loaded from CDN in templates

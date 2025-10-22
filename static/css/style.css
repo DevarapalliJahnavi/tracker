@@ -1,0 +1,141 @@
+/* Global styles for Expense Tracker - modern fintech look */
+:root{
+  --bg-light: #f8fafc;
+  --bg-dark: #0f172a;
+  --primary: #2563eb;
+  --primary-2: #3b82f6;
+  --accent: #22c55e;
+  --text-light: #1f2937;
+  --text-dark: #f1f5f9;
+  --card-light: rgba(255,255,255,0.6);
+  --card-dark: rgba(17,25,40,0.6);
+  --glass-radius: 12px;
+  --transition: 0.3s ease-in-out;
+}
+
+/* Theme root */
+.theme-root{
+  font-family: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+  background-color:var(--bg-light);
+  color:var(--text-light);
+}
+.theme-root.dark{
+  background-color:var(--bg-dark);
+  color:var(--text-dark);
+}
+
+/* Parallax layers */
+.parallax-layer{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover;
+  z-index:-3;
+  pointer-events:none;
+}
+.layer-back{
+  background-image: radial-gradient(circle at 10% 10%, rgba(34,197,94,0.06), transparent 20%), linear-gradient(120deg, rgba(37,99,235,0.06), rgba(34,197,94,0.04));
+  transform:translateZ(-1px) scale(1.2);
+}
+.layer-mid{
+  background-image: url('/static/img/waves.svg');
+  opacity:0.8;
+  z-index:-2;
+}
+.layer-front{
+  background-image: linear-gradient(90deg, rgba(37,99,235,0.04), rgba(34,197,94,0.03));
+  z-index:-1;
+}
+
+/* Navbar */
+.navbar-sticky{
+  position:sticky;top:0;z-index:50;background:transparent;border-bottom:1px solid rgba(0,0,0,0.04);
+}
+.theme-root.dark .navbar-sticky{border-bottom:1px solid rgba(255,255,255,0.04)}
+.navbar .brand-text{font-weight:700}
+
+/* Glass cards */
+.glass{
+  background: var(--card-light);
+  border-radius:var(--glass-radius);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  transition:box-shadow var(--transition), transform var(--transition), background var(--transition);
+}
+.theme-root.dark .glass{
+  background: var(--card-dark);
+  box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+}
+.card.stat-card .icon{width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:20px}
+
+/* Hero */
+.hero{position:relative}
+.hero-card{transform:translateY(8%);}
+
+/* Stat cards */
+.stat-card{border:none}
+.stat-card .countup{font-weight:700}
+
+/* Progress bar styles */
+.progress.large{height:18px;border-radius:12px}
+.progress .progress-bar.bg-gradient{background:linear-gradient(90deg,var(--primary-2),var(--accent));box-shadow:0 6px 18px rgba(59,130,246,0.24)}
+.progress.bg-soft{background:rgba(0,0,0,0.06)}
+.theme-root.dark .progress.bg-soft{background:rgba(255,255,255,0.04)}
+
+/* Table */
+.table tr{transition:background var(--transition)}
+.table tr:hover{background:rgba(0,0,0,0.03)}
+.theme-root.dark .table tr:hover{background:rgba(255,255,255,0.02)}
+
+/* Floating action button */
+.fab{position:fixed;right:24px;bottom:24px;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 10px 30px rgba(37,99,235,0.15);transition:transform .4s cubic-bezier(.2,.9,.2,1);z-index:60}
+.fab:hover{transform:translateY(-6px)}
+@keyframes fab-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fab{animation:fab-bounce 4s infinite}
+
+/* Back to top */
+.backtop{position:fixed;right:24px;bottom:100px;border-radius:50%;width:48px;height:48px;z-index:60}
+
+/* Buttons */
+.btn{transition:all var(--transition)}
+.btn-outline-primary{border-color:rgba(37,99,235,0.18)}
+
+/* Responsive tweaks */
+@media (max-width: 768px){
+  .hero-card{display:none}
+  .fab{right:16px;bottom:16px}
+}
+
+/* Dark mode overrides */
+.theme-root.dark{
+  background: linear-gradient(180deg,#041024 0%, #07132a 100%);
+  color:var(--text-dark);
+}
+.theme-root.dark .brand-text{color:var(--text-dark)}
+.theme-root.dark a.btn-primary{background:linear-gradient(90deg,var(--primary-2),#60a5fa);border:none}
+
+/* AOS entrance tweaks */
+[data-aos]{opacity:0;transform:translateY(10px);transition:opacity 0.8s ease, transform 0.8s ease}
+[data-aos].aos-animate{opacity:1;transform:none}
+
+/* small utilities */
+.bg-soft{background:rgba(0,0,0,0.03)}
+.theme-root.dark .bg-soft{background:rgba(255,255,255,0.02)}
+
+/* Form focus */
+.form-control:focus{box-shadow:0 6px 20px rgba(37,99,235,0.08)}
+
+/* subtle animated gradient overlay */
+.gradient-animate{position:absolute;inset:0;mix-blend-mode:overlay;pointer-events:none;opacity:0.6;background:linear-gradient(60deg,rgba(37,99,235,0.06),rgba(34,197,94,0.05));animation:moveGradient 8s linear infinite}
+@keyframes moveGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Utility for glass hover elevation */
+.glass:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.12)}
+
+/* Accessibility */
+:focus{outline:2px solid rgba(37,99,235,0.16);outline-offset:2px}
